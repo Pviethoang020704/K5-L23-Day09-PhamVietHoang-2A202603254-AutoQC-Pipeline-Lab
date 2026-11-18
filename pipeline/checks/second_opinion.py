@@ -35,10 +35,162 @@ Gợi ý
 - `iou_xywh` có sẵn. Dòng nhãn hỏng không được làm script chết (dùng `ds.valid_boxes` và `parse_yolo_line` trong try).
 - Kết quả phụ thuộc mạnh vào ngưỡng: calibrate chúng ở Bước 3 thay vì đoán.
 """
+import math
+
 from ..common import WARN, Issue, iou_xywh, parse_yolo_line  # noqa: F401
 from ..model_cache import get_preds  # noqa: F401
 
 
 def run(ds, cfg, preds=None):
-    # TODO
-    raise NotImplementedError("check second_opinion chưa làm")
+    if preds is None:
+        preds = get_preds(ds, cfg, "checker")
+
+    settings = cfg["second_opinion"]
+    issues = []
+    for image_path in ds.image_files():
+        stem = image_path.stem
+        if stem not in preds:
+            continue
+
+        raw_labels = ds.read_label_lines(stem)
+        if raw_labels is None:
+            continue
+
+        labels = []
+        for line_number, text in raw_labels:
+            try:
+                box = parse_yolo_line(text)
+            except (ValueError, OverflowError):
+                continue
+            if 0 <= box[0] < len(ds.classes):
+                labels.append((box[0], *box[1:], line_number))
+
+        image_size = ds.image_size(stem)
+        image_width, image_height = image_size if image_size is not None else (0, 0)
+
+        model_predictions = []
+        for index, row in enumerate(preds[stem]):
+            if len(row) != 6:
+                raise ValueError(
+                    f"prediction {index} for {stem!r} must have 6 values"
+                )
+            try:
+                raw_class_id, raw_confidence, *raw_box = row
+                class_value = float(raw_class_id)
+                confidence = float(raw_confidence)
+                box_values = tuple(float(value) for value in raw_box)
+            except (TypeError, ValueError, OverflowError) as exc:
+                raise ValueError(
+                    f"prediction {index} for {stem!r} contains non-numeric values"
+                ) from exc
+
+            if (
+                not math.isfinite(class_value)
+                or not class_value.is_integer()
+                or not math.isfinite(confidence)
+                or any(not math.isfinite(value) for value in box_values)
+            ):
+                raise ValueError(f"prediction {index} for {stem!r} contains invalid values")
+            if not 0 <= confidence <= 1:
+                raise ValueError(
+                    f"prediction {index} for {stem!r} has confidence outside [0, 1]"
+                )
+
+            class_id = int(class_value)
+            cx, cy, width, height = box_values
+            if not 0 <= class_id < len(ds.classes) or width <= 0 or height <= 0:
+                continue
+            model_predictions.append((class_id, confidence, (cx, cy, width, height)))
+
+        checked_predictions = []
+        for class_id, confidence, box in model_predictions:
+            if confidence >= settings["conf"] and image_size is not None and (
+                box[2] * image_width * box[3] * image_height
+                >= settings["min_area_px"]
+            ):
+                checked_predictions.append((class_id, confidence, box))
+
+        for class_id, confidence, box in checked_predictions:
+            overlaps = []
+            for label_class, cx, cy, width, height, _ in labels:
+                overlaps.append(
+                    (label_class, iou_xywh(box, (cx, cy, width, height)))
+                )
+            candidates = [
+                (label_class, overlap)
+                for label_class, overlap in overlaps
+                if overlap >= settings["iou_missing"]
+            ]
+
+            if not candidates:
+                issues.append(
+                    Issue(
+                        "second_opinion",
+                        WARN,
+                        "POSSIBLE_MISSING",
+                        stem,
+                        "mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra",
+                        extra={"conf": confidence},
+                    )
+                )
+                continue
+
+            same_class = [
+                overlap for label_class, overlap in candidates if label_class == class_id
+            ]
+            if same_class:
+                best_iou = max(same_class)
+                if best_iou < settings["iou_loose"]:
+                    issues.append(
+                        Issue(
+                            "second_opinion",
+                            WARN,
+                            "POSSIBLE_LOOSE_BOX",
+                            stem,
+                            "nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra",
+                            extra={"conf": confidence, "iou": best_iou},
+                        )
+                    )
+                continue
+
+            best_other_iou = max(overlap for _, overlap in candidates)
+            if best_other_iou >= settings["iou_match"]:
+                issues.append(
+                    Issue(
+                        "second_opinion",
+                        WARN,
+                        "POSSIBLE_WRONG_CLASS",
+                        stem,
+                        "vị trí khớp nhưng lớp nhãn khác dự đoán; cần người kiểm tra",
+                        extra={"conf": confidence, "iou": best_other_iou},
+                    )
+                )
+
+        false_positive_predictions = [
+            (class_id, confidence, box)
+            for class_id, confidence, box in model_predictions
+            if confidence >= settings["fp_conf"]
+        ]
+        for label_class, cx, cy, width, height, line_number in labels:
+            label_box = (cx, cy, width, height)
+            best_iou = max(
+                (
+                    iou_xywh(label_box, prediction_box)
+                    for _, _, prediction_box in false_positive_predictions
+                ),
+                default=0.0,
+            )
+            if best_iou < settings["iou_missing"]:
+                issues.append(
+                    Issue(
+                        "second_opinion",
+                        WARN,
+                        "POSSIBLE_FALSE_POS",
+                        stem,
+                        "nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra",
+                        line=line_number,
+                        extra={"iou": best_iou},
+                    )
+                )
+
+    return issues

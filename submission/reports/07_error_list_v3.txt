@@ -1,0 +1,84 @@
+# Danh sách lỗi — SAU người duyệt (v3)
+ảnh đã quét: 193
+
+label_format -> 10 dòng
+missing_labels -> 3 dòng
+second_opinion -> 53 dòng
+
+[WARN ] BOX_HUGE             img_0018.txt:1  box chiếm diện tích quá lớn của ảnh
+[WARN ] BOX_HUGE             img_0128.txt:1  box chiếm diện tích quá lớn của ảnh
+[WARN ] BOX_HUGE             img_0196.txt:1  box chiếm diện tích quá lớn của ảnh
+[WARN ] BOX_TINY             img_0026.txt:6  cạnh ngắn của box nhỏ hơn ngưỡng tối thiểu
+[WARN ] BOX_TINY             img_0051.txt:5  cạnh ngắn của box nhỏ hơn ngưỡng tối thiểu
+[WARN ] BOX_TINY             img_0069.txt:2  cạnh ngắn của box nhỏ hơn ngưỡng tối thiểu
+[WARN ] BOX_TINY             img_0161.txt:2  cạnh ngắn của box nhỏ hơn ngưỡng tối thiểu
+[WARN ] BOX_TINY             img_0161.txt:3  cạnh ngắn của box nhỏ hơn ngưỡng tối thiểu
+[WARN ] BOX_TINY             img_0161.txt:4  cạnh ngắn của box nhỏ hơn ngưỡng tối thiểu
+[WARN ] BOX_TINY             img_0183.txt:11  cạnh ngắn của box nhỏ hơn ngưỡng tối thiểu
+[WARN ] EMPTY_LABEL          img_0097  file nhãn rỗng: ảnh nền hay thiếu nhãn?
+[WARN ] EMPTY_LABEL          img_0129  file nhãn rỗng: ảnh nền hay thiếu nhãn?
+[WARN ] EMPTY_LABEL          img_0192  file nhãn rỗng: ảnh nền hay thiếu nhãn?
+[WARN ] POSSIBLE_FALSE_POS   img_0014.txt:2  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0022.txt:2  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0035.txt:2  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0068.txt:8  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0069.txt:2  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0075.txt:6  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0091.txt:7  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0093.txt:3  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0095.txt:6  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0111.txt:2  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0124.txt:8  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0131.txt:11  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0134.txt:5  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0149.txt:3  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0150.txt:3  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0180.txt:5  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0189.txt:4  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0191.txt:1  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0206.txt:1  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_FALSE_POS   img_0212.txt:4  nhãn không khớp dự đoán đủ tin cậy; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0015  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0018  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0036  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0045  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0046  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0054  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0058  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0064  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0077  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0082  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0090  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0099  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0119  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0125  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0142  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0175  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0200  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_LOOSE_BOX   img_0212  nhãn cùng lớp có thể bị lỏng hoặc lệch; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0032  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0062  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0121  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0126  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0127  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0127  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0135  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0159  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0160  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0183  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0199  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_MISSING     img_0220  mô hình phát hiện vật thể nhưng không có nhãn khớp; cần người kiểm tra
+[WARN ] POSSIBLE_WRONG_CLASS img_0078  vị trí khớp nhưng lớp nhãn khác dự đoán; cần người kiểm tra
+[WARN ] POSSIBLE_WRONG_CLASS img_0083  vị trí khớp nhưng lớp nhãn khác dự đoán; cần người kiểm tra
+[WARN ] POSSIBLE_WRONG_CLASS img_0220  vị trí khớp nhưng lớp nhãn khác dự đoán; cần người kiểm tra
+
+## Tổng hợp theo mã
+warn  BOX_HUGE               3
+warn  BOX_TINY               7
+warn  EMPTY_LABEL            3
+warn  POSSIBLE_FALSE_POS     20
+warn  POSSIBLE_LOOSE_BOX     18
+warn  POSSIBLE_MISSING       12
+warn  POSSIBLE_WRONG_CLASS   3
+
+Kết luận: HOLD — Cảnh báo chưa xử lý ở 34/193 ảnh (0.1762), đạt hoặc vượt ngưỡng Hold 0.1000.
